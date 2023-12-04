@@ -66,4 +66,13 @@ type PhoneRecordsExelData = {|
       </types:input-event>
     </types:processor-declaration>
   </types:enrichment>
+  <types:enrichment select="#bbeb697d-e8a4-4229-a9ab-15d404e57cbc">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="PhoneRecordsExelData"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
 </types:mule>

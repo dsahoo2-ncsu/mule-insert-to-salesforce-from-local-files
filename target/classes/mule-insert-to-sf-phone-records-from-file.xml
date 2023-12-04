@@ -24,7 +24,7 @@ output application/json deferred=true
 (payload.Sheet1 default [])]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<foreach doc:name="For Each" doc:id="12ab9a5f-776c-4cc3-bc93-5fc3af6440f6" batchSize="50000">
+		<foreach doc:name="For Each fifty thousand Phone records" doc:id="12ab9a5f-776c-4cc3-bc93-5fc3af6440f6" batchSize="50000">
 			<ee:transform doc:name="Transform Message" doc:id="ee73e2d2-8bc8-4f1e-9170-a276d32ccff9">
 			<ee:message>
 				<ee:set-payload><![CDATA[%dw 2.0

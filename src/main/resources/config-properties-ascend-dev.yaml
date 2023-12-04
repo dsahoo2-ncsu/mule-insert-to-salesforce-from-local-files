@@ -8,3 +8,7 @@ fileConnector:
   phoneRecordsMoveToFolder: "C:\\Users\\dsahoo2\\Downloads\\MulesoftDataLoad\\CsvUploadResultFiles\\PhoneRecords"
   PhoneRecordsReadExcelFile: "C:\\Users\\dsahoo2\\Downloads\\MulesoftDataLoad\\CsvFiles\\PhoneRecords\\PhoneRecordsFile.xlsx"
   PhoneRecordsWriteExcelFile: "C:\\Users\\dsahoo2\\Downloads\\MulesoftDataLoad\\CsvUploadResultFiles\\PhoneRecords\\PhoneRecordsResult.csv"
+  AddressRelationsReadFolder: "C:\\Users\\dsahoo2\\Downloads\\MulesoftDataLoad\\CsvFiles\\AddressRelations"
+  AddressRelationsMoveToFolder: "C:\\Users\\dsahoo2\\Downloads\\MulesoftDataLoad\\CsvUploadResultFiles\\AddressRelations"
+  AddressRelationsReadExcelFile: "C:\\Users\\dsahoo2\\Downloads\\MulesoftDataLoad\\CsvFiles\\AddressRelations\\AddressRelations.xlsx"
+  AddressRelationsWriteExcelFile: "C:\\Users\\dsahoo2\\Downloads\\MulesoftDataLoad\\CsvUploadResultFiles\\AddressRelations\\AddressRelationsResults.csv"

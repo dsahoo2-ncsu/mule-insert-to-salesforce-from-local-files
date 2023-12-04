@@ -1,6 +1,7 @@
 {
   "configs": [
     "mule-insert-to-sf-phone-records-from-file.xml",
+    "mule-insert-to-address-relation-from-file.xml",
     "mule-insert-to-salesforce-from-files.xml"
   ],
   "secureProperties": [],
@@ -18,6 +19,7 @@
         "examples/ExcelSheetforPhoneRecords.json",
         "examples/PhoneRecordsSample.json",
         "log4j2.xml",
+        "mule-insert-to-address-relation-from-file.xml",
         "mule-insert-to-salesforce-from-files.xml",
         "mule-insert-to-sf-phone-records-from-file.xml"
       ]
