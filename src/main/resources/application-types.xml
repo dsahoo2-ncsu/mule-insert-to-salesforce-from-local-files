@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="PhoneRecordsExample" format="json">
+      <types:shape format="weave" example="examples/PhoneRecordsSample.json"><![CDATA[%dw 2.0
+
+type PhoneRecordsExample = {|
+  RecordTypeId: String, 
+  "ucinn_ascendv2__Account__r.ucinn_ascendv2__External_System_ID__c": String, 
+  "ucinn_ascendv2__Contact__r.ucinn_ascendv2__External_System_ID__c": String, 
+  ucinn_ascendv2__Data_Source__c: String, 
+  ucinn_ascendv2__End_Date__c: String, 
+  ucinn_ascendv2__Extension__c: String, 
+  ucinn_ascendv2__External_System_ID__c: String, 
+  ucinn_ascendv2__Is_Preferred_c: String, 
+  ucinn_ascendv2__Notes__c: String, 
+  ucinn_ascendv2__Phone_Number__c: String, 
+  ucinn_ascendv2__Start_Date__c: String, 
+  ucinn_ascendv2__Status__c: String, 
+  ucinn_ascendv2__Type__c: String, 
+  NCSU_Historic_User_Group__c: String, 
+  NCSU_Historic_Created_By__c: String, 
+  NCSU_Historic_Created_Date__c: String, 
+  NCSU_Modified_Date__c: String, 
+  CreatedDate: String, 
+  LastModifiedDate: String
+|} {"example": "{\\\"RecordTypeId\\\":\\\"012Do000000gEJaIAM\\\",\\\"ucinn_ascendv2__Account__r.ucinn_ascendv2__External_System_ID__c\\\":\\\"0000000001\\\",\\\"ucinn_ascendv2__Contact__r.ucinn_ascendv2__External_System_ID__c\\\":\\\"\\\",\\\"ucinn_ascendv2__Data_Source__c\\\":\\\"\\\",\\\"ucinn_ascendv2__End_Date__c\\\":\\\"\\\",\\\"ucinn_ascendv2__Extension__c\\\":\\\" \\\",\\\"ucinn_ascendv2__External_System_ID__c\\\":\\\"0000000001_1\\\",\\\"ucinn_ascendv2__Is_Preferred_c\\\":\\\"False\\\",\\\"ucinn_ascendv2__Notes__c\\\":\\\"\\\",\\\"ucinn_ascendv2__Phone_Number__c\\\":\\\"9103952112\\\",\\\"ucinn_ascendv2__Start_Date__c\\\":\\\"2000-07-03 00:00:00\\\",\\\"ucinn_ascendv2__Status__c\\\":\\\"Current\\\",\\\"ucinn_ascendv2__Type__c\\\":\\\"Business\\\",\\\"NCSU_Historic_User_Group__c\\\":\\\"AB\\\",\\\"NCSU_Historic_Created_By__c\\\":\\\"lmvinson\\\",\\\"NCSU_Historic_Created_Date__c\\\":\\\"2000-07-03 00:00:00\\\",\\\"NCSU_Modified_Date__c\\\":\\\"2017-02-06 09:39:48\\\",\\\"CreatedDate\\\":\\\"2000-07-03 00:00:00\\\",\\\"LastModifiedDate\\\":\\\"2017-02-06 09:39:48\\\"}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="PhoneRecordsExelData" format="json">
+      <types:shape format="weave" example="examples/ExcelSheetforPhoneRecords.json"><![CDATA[%dw 2.0
+
+type PhoneRecordsExelData = {|
+  Sheet1: Array<{|    RecordTypeId: String,     "ucinn_ascendv2__Account__r.ucinn_ascendv2__External_System_ID__c": String,     "ucinn_ascendv2__Contact__r.ucinn_ascendv2__External_System_ID__c": String,     ucinn_ascendv2__Data_Source__c: String,     ucinn_ascendv2__End_Date__c: String,     ucinn_ascendv2__Extension__c: String,     ucinn_ascendv2__External_System_ID__c: String,     ucinn_ascendv2__Is_Preferred_c: String,     ucinn_ascendv2__Notes__c: String,     ucinn_ascendv2__Phone_Number__c: String,     ucinn_ascendv2__Start_Date__c: String,     ucinn_ascendv2__Status__c: String,     ucinn_ascendv2__Type__c: String,     NCSU_Historic_User_Group__c: String,     NCSU_Historic_Created_By__c: String,     NCSU_Historic_Created_Date__c: String,     NCSU_Modified_Date__c: String,     CreatedDate: String,     LastModifiedDate: String  |}>, 
+  Sheet2: Array<Any>
+|} {"example": "{\\\"Sheet1\\\":[{\\\"RecordTypeId\\\":\\\"012Do000000gEJZIA2\\\",\\\"ucinn_ascendv2__Account__r.ucinn_ascendv2__External_System_ID__c\\\":\\\"\\\",\\\"ucinn_ascendv2__Contact__r.ucinn_ascendv2__External_System_ID__c\\\":\\\"0000139455\\\",\\\"ucinn_ascendv2__Data_Source__c\\\":\\\"Non-Development Office\\\",\\\"ucinn_ascendv2__End_Date__c\\\":\\\"2022-09-16 12:09:00\\\",\\\"ucinn_ascendv2__Extension__c\\\":\\\" \\\",\\\"ucinn_ascendv2__External_System_ID__c\\\":\\\"0000139455_1\\\",\\\"ucinn_ascendv2__Is_Preferred_c\\\":\\\"False\\\",\\\"ucinn_ascendv2__Notes__c\\\":\\\"Entity stated: \\\\\\\"Do not call me EVER. I REALLY REALLY MEAN THIS. If you screw up and some poor underpaid undergrad work study calls me for \$\$ at my dinner hour I will chew her a new hole. And I won\u2019t donate anything to NC State for a long while.  I\u2019m very very serious here. Do not call me. However, if you politely send me requests for \$\$ from time to time I\u2019m happy to donate. Just keep my info current. Thank you.\\\\\\\"\\\",\\\"ucinn_ascendv2__Phone_Number__c\\\":\\\"7645439245\\\",\\\"ucinn_ascendv2__Start_Date__c\\\":\\\"2019-10-08 00:00:00\\\",\\\"ucinn_ascendv2__Status__c\\\":\\\"Former\\\",\\\"ucinn_ascendv2__Type__c\\\":\\\"Home\\\",\\\"NCSU_Historic_User_Group__c\\\":\\\"AB\\\",\\\"NCSU_Historic_Created_By__c\\\":\\\"lmvinson\\\",\\\"NCSU_Historic_Created_Date__c\\\":\\\"2019-10-08 10:06:22\\\",\\\"NCSU_Modified_Date__c\\\":\\\"2022-09-16 08:50:19\\\",\\\"CreatedDate\\\":\\\"2019-10-08 10:06:22\\\",\\\"LastModifiedDate\\\":\\\"2022-09-16 08:50:19\\\"},{\\\"RecordTypeId\\\":\\\"012Do000000gEJZIA2\\\",\\\"ucinn_ascendv2__Account__r.ucinn_ascendv2__External_System_ID__c\\\":\\\"\\\",\\\"ucinn_ascendv2__Contact__r.ucinn_ascendv2__External_System_ID__c\\\":\\\"0000139455\\\",\\\"ucinn_ascendv2__Data_Source__c\\\":\\\"Non-Development Office\\\",\\\"ucinn_ascendv2__End_Date__c\\\":\\\"\\\",\\\"ucinn_ascendv2__Extension__c\\\":\\\" \\\",\\\"ucinn_ascendv2__External_System_ID__c\\\":\\\"0000139455_2\\\",\\\"ucinn_ascendv2__Is_Preferred_c\\\":\\\"False\\\",\\\"ucinn_ascendv2__Notes__c\\\":\\\"Do not call.\\\",\\\"ucinn_ascendv2__Phone_Number__c\\\":\\\"7655439245\\\",\\\"ucinn_ascendv2__Start_Date__c\\\":\\\"2020-01-02 00:00:00\\\",\\\"ucinn_ascendv2__Status__c\\\":\\\"Current\\\",\\\"ucinn_ascendv2__Type__c\\\":\\\"Mobile\\\",\\\"NCSU_Historic_User_Group__c\\\":\\\"AB\\\",\\\"NCSU_Historic_Created_By__c\\\":\\\"lmvinson\\\",\\\"NCSU_Historic_Created_Date__c\\\":\\\"2020-01-02 18:18:06\\\",\\\"NCSU_Modified_Date__c\\\":\\\"2022-09-16 08:50:19\\\",\\\"CreatedDate\\\":\\\"2020-01-02 18:18:06\\\",\\\"LastModifiedDate\\\":\\\"2022-09-16 08:50:19\\\"},{\\\"RecordTypeId\\\":\\\"012Do000000gEJZIA2\\\",\\\"ucinn_ascendv2__Account__r.ucinn_ascendv2__External_System_ID__c\\\":\\\"\\\",\\\"ucinn_ascendv2__Contact__r.ucinn_ascendv2__External_System_ID__c\\\":\\\"0000139455\\\",\\\"ucinn_ascendv2__Data_Source__c\\\":\\\"Anthology\\\",\\\"ucinn_ascendv2__End_Date__c\\\":\\\"\\\",\\\"ucinn_ascendv2__Extension__c\\\":\\\" \\\",\\\"ucinn_ascendv2__External_System_ID__c\\\":\\\"0000139455_3\\\",\\\"ucinn_ascendv2__Is_Preferred_c\\\":\\\"True\\\",\\\"ucinn_ascendv2__Notes__c\\\":\\\"\\\",\\\"ucinn_ascendv2__Phone_Number__c\\\":\\\"7655439245\\\",\\\"ucinn_ascendv2__Start_Date__c\\\":\\\"2022-09-16 00:00:00\\\",\\\"ucinn_ascendv2__Status__c\\\":\\\"Current\\\",\\\"ucinn_ascendv2__Type__c\\\":\\\"Home\\\",\\\"NCSU_Historic_User_Group__c\\\":\\\"AB\\\",\\\"NCSU_Historic_Created_By__c\\\":\\\"lmvinson\\\",\\\"NCSU_Historic_Created_Date__c\\\":\\\"2022-09-16 08:50:19\\\",\\\"NCSU_Modified_Date__c\\\":\\\"2022-09-16 08:50:19\\\",\\\"CreatedDate\\\":\\\"2022-09-16 08:50:19\\\",\\\"LastModifiedDate\\\":\\\"2022-09-16 08:50:19\\\"}],\\\"Sheet2\\\":[]}"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#86ada220-3581-4cea-8250-a3830e54d8c3">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="PhoneRecordsExample[]"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#c388c07f-1f03-40fb-9270-7921bbd097eb">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="PhoneRecordsExelData"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#612fa7eb-2d12-4392-a612-43e5ccd60724">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="PhoneRecordsExelData"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>

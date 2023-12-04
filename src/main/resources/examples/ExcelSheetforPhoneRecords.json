@@ -1,0 +1,70 @@
+{
+  "Sheet1": [
+    {
+      "RecordTypeId": "012Do000000gEJZIA2",
+      "ucinn_ascendv2__Account__r.ucinn_ascendv2__External_System_ID__c": "",
+      "ucinn_ascendv2__Contact__r.ucinn_ascendv2__External_System_ID__c": "0000139455",
+      "ucinn_ascendv2__Data_Source__c": "Non-Development Office",
+      "ucinn_ascendv2__End_Date__c": "2022-09-16 12:09:00",
+      "ucinn_ascendv2__Extension__c": " ",
+      "ucinn_ascendv2__External_System_ID__c": "0000139455_1",
+      "ucinn_ascendv2__Is_Preferred_c": "False",
+      "ucinn_ascendv2__Notes__c": "Entity stated: \"Do not call me EVER. I REALLY REALLY MEAN THIS. If you screw up and some poor underpaid undergrad work study calls me for $$ at my dinner hour I will chew her a new hole. And I won’t donate anything to NC State for a long while.  I’m very very serious here. Do not call me. However, if you politely send me requests for $$ from time to time I’m happy to donate. Just keep my info current. Thank you.\"",
+      "ucinn_ascendv2__Phone_Number__c": "7645439245",
+      "ucinn_ascendv2__Start_Date__c": "2019-10-08 00:00:00",
+      "ucinn_ascendv2__Status__c": "Former",
+      "ucinn_ascendv2__Type__c": "Home",
+      "NCSU_Historic_User_Group__c": "AB",
+      "NCSU_Historic_Created_By__c": "lmvinson",
+      "NCSU_Historic_Created_Date__c": "2019-10-08 10:06:22",
+      "NCSU_Modified_Date__c": "2022-09-16 08:50:19",
+      "CreatedDate": "2019-10-08 10:06:22",
+      "LastModifiedDate": "2022-09-16 08:50:19"
+    },
+    {
+      "RecordTypeId": "012Do000000gEJZIA2",
+      "ucinn_ascendv2__Account__r.ucinn_ascendv2__External_System_ID__c": "",
+      "ucinn_ascendv2__Contact__r.ucinn_ascendv2__External_System_ID__c": "0000139455",
+      "ucinn_ascendv2__Data_Source__c": "Non-Development Office",
+      "ucinn_ascendv2__End_Date__c": "",
+      "ucinn_ascendv2__Extension__c": " ",
+      "ucinn_ascendv2__External_System_ID__c": "0000139455_2",
+      "ucinn_ascendv2__Is_Preferred_c": "False",
+      "ucinn_ascendv2__Notes__c": "Do not call.",
+      "ucinn_ascendv2__Phone_Number__c": "7655439245",
+      "ucinn_ascendv2__Start_Date__c": "2020-01-02 00:00:00",
+      "ucinn_ascendv2__Status__c": "Current",
+      "ucinn_ascendv2__Type__c": "Mobile",
+      "NCSU_Historic_User_Group__c": "AB",
+      "NCSU_Historic_Created_By__c": "lmvinson",
+      "NCSU_Historic_Created_Date__c": "2020-01-02 18:18:06",
+      "NCSU_Modified_Date__c": "2022-09-16 08:50:19",
+      "CreatedDate": "2020-01-02 18:18:06",
+      "LastModifiedDate": "2022-09-16 08:50:19"
+    },
+    {
+      "RecordTypeId": "012Do000000gEJZIA2",
+      "ucinn_ascendv2__Account__r.ucinn_ascendv2__External_System_ID__c": "",
+      "ucinn_ascendv2__Contact__r.ucinn_ascendv2__External_System_ID__c": "0000139455",
+      "ucinn_ascendv2__Data_Source__c": "Anthology",
+      "ucinn_ascendv2__End_Date__c": "",
+      "ucinn_ascendv2__Extension__c": " ",
+      "ucinn_ascendv2__External_System_ID__c": "0000139455_3",
+      "ucinn_ascendv2__Is_Preferred_c": "True",
+      "ucinn_ascendv2__Notes__c": "",
+      "ucinn_ascendv2__Phone_Number__c": "7655439245",
+      "ucinn_ascendv2__Start_Date__c": "2022-09-16 00:00:00",
+      "ucinn_ascendv2__Status__c": "Current",
+      "ucinn_ascendv2__Type__c": "Home",
+      "NCSU_Historic_User_Group__c": "AB",
+      "NCSU_Historic_Created_By__c": "lmvinson",
+      "NCSU_Historic_Created_Date__c": "2022-09-16 08:50:19",
+      "NCSU_Modified_Date__c": "2022-09-16 08:50:19",
+      "CreatedDate": "2022-09-16 08:50:19",
+      "LastModifiedDate": "2022-09-16 08:50:19"
+    }
+  ],
+  "Sheet2": [
+    
+  ]
+}
