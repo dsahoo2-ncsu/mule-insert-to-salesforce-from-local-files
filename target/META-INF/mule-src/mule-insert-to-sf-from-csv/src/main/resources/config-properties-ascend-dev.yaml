@@ -2,3 +2,9 @@ salesforce:
   username: "dsahoo2@ncsu.edu.ascenddev"
   password: "Dips@123dips"
   securitytoken: "e0WfOrpLxb8zadeUnnjKikzMj"
+  
+fileConnector:
+  phoneRecordsReadFolder: "C:\\Users\\dsahoo2\\Downloads\\MulesoftDataLoad\\CsvFiles\\PhoneRecords"
+  phoneRecordsMoveToFolder: "C:\\Users\\dsahoo2\\Downloads\\MulesoftDataLoad\\CsvUploadResultFiles\\PhoneRecords"
+  PhoneRecordsReadExcelFile: "C:\\Users\\dsahoo2\\Downloads\\MulesoftDataLoad\\CsvFiles\\PhoneRecords\\PhoneRecordsFile.xlsx"
+  PhoneRecordsWriteExcelFile: "C:\\Users\\dsahoo2\\Downloads\\MulesoftDataLoad\\CsvUploadResultFiles\\PhoneRecords\\PhoneRecordsResult.csv"

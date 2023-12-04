@@ -10,12 +10,12 @@ http://www.mulesoft.org/schema/mule/batch http://www.mulesoft.org/schema/mule/ba
 http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd 
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd">	<flow name="mule-insert-to-sf-phone-records-from-file" doc:id="8741b9aa-2c73-44db-a899-f684313f007e" >
-		<file:listener doc:name="On New or Updated File in PhoneRecords" doc:id="5c504a2b-963a-4347-b968-44156c09a06a" config-ref="File_Config" directory="C:\Users\dsahoo2\Downloads\MulesoftDataLoad\CsvFiles\PhoneRecords" watermarkMode="MODIFIED_TIMESTAMP" moveToDirectory="C:\Users\dsahoo2\Downloads\MulesoftDataLoad\CsvUploadResultFiles\PhoneRecords" overwrite="true">
+		<file:listener doc:name="On New or Updated File in PhoneRecords" doc:id="5c504a2b-963a-4347-b968-44156c09a06a" config-ref="File_Config" directory="${fileConnector.phoneRecordsReadFolder}" moveToDirectory="${fileConnector.phoneRecordsMoveToFolder}" overwrite="true">
 			<scheduling-strategy >
 				<fixed-frequency />
 			</scheduling-strategy>
 		</file:listener>
-		<file:read doc:name="Read File from PhoneRecords" doc:id="79efaabc-37fc-4adf-b387-406c889da58c" config-ref="File_Config" path="C:\Users\dsahoo2\Downloads\MulesoftDataLoad\CsvFiles\PhoneRecords\Phone Sample Records.xlsx" outputMimeType="application/xlsx; streaming=true" outputEncoding="UTF-8"/>
+		<file:read doc:name="Read File from PhoneRecords" doc:id="79efaabc-37fc-4adf-b387-406c889da58c" config-ref="File_Config" path="${fileConnector.PhoneRecordsReadExcelFile}" outputMimeType="application/xlsx; streaming=true" outputEncoding="UTF-8"/>
 		<ee:transform doc:name="Transform Phone records From  excel to json" doc:id="612fa7eb-2d12-4392-a612-43e5ccd60724">
 			<ee:message>
 				<ee:set-payload><![CDATA[%dw 2.0
@@ -208,7 +208,7 @@ var filteredPayload = payload filter (item) -> item.successful == false
 filteredPayload]]></ee:set-payload>
 										</ee:message>
 									</ee:transform>
-									<file:write doc:name="Write" doc:id="338ad4d7-f2f4-4a94-b0e3-c602f10de806" config-ref="File_Config" path="C:\Users\dsahoo2\Downloads\MulesoftDataLoad\CsvUploadResultFiles\PhoneRecords\PhoneRecordsResult.csv" mode="APPEND">
+									<file:write doc:name="Write" doc:id="338ad4d7-f2f4-4a94-b0e3-c602f10de806" config-ref="File_Config" path="${fileConnector.PhoneRecordsWriteExcelFile}" mode="APPEND">
 								</file:write>
 							
 </otherwise>
