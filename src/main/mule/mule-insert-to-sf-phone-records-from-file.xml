@@ -182,7 +182,7 @@ payload map(item)-> {
 	message: item.message default "" as String,
     statusCode: item.statusCode default "" as String,
     //exceptionMessage: (item.exception default {localizedMessage:""}).localizedMessage default "" as String,
-	//successful:item.successful     
+	successful:item.successful     
 }]]></ee:set-payload>
 										</ee:message>
 									</ee:transform>
