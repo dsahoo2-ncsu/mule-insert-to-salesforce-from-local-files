@@ -150,7 +150,7 @@ payload map (item) -> (
 			<batch:process-records>
 				<batch:step name="Batch_Step_PhoneRecords" doc:id="1135642a-f112-4168-be95-90f10918f0a8">
 					<batch:aggregator doc:name="Batch Aggregator_PhoneRecords" doc:id="ce9b040a-60c5-430b-8806-78875e1fec70" size="50">
-						<set-variable value='#[payload map (item) -&gt;(&#10;item &#10;- "ucinn_ascendv2__Contact__r" &#10;- "ucinn_ascendv2__Account__r"&#10;)&#10;++ &#10;{&#10;    "ucinn_ascendv2__Contact__r.ucinn_ascendv2__External_System_ID__c":&#10;    item.ucinn_ascendv2__Contact__r.ucinn_ascendv2__External_System_ID__c default "" as String&#10;    }&#10;++ &#10;{&#10;    "ucinn_ascendv2__Account__r.ucinn_ascendv2__External_System_ID__c":&#10;    item.ucinn_ascendv2__Account__r.ucinn_ascendv2__External_System_ID__c default ""  as String&#10;    }]' doc:name="Set Variable" doc:id="a1e07c99-ca82-4c76-ace7-e47ce4a39061" variableName="RequestPayload"/>
+						<set-variable value='#[payload map (item) -&gt;&#10;{&#10;    "ucinn_ascendv2__Contact__r.ucinn_ascendv2__External_System_ID__c":&#10;    item.ucinn_ascendv2__Contact__r.ucinn_ascendv2__External_System_ID__c default "" as String,&#10;    "ucinn_ascendv2__Account__r.ucinn_ascendv2__External_System_ID__c":&#10;    item.ucinn_ascendv2__Account__r.ucinn_ascendv2__External_System_ID__c default ""  as String&#10;}]' doc:name="Set Variable" doc:id="a1e07c99-ca82-4c76-ace7-e47ce4a39061" variableName="RequestPayload"/>
 							<!-- [STUDIO:"Create Phone Records"]<salesforce:create doc:name="Create Phone Records" doc:id="f10f46cb-0cb1-43a6-85b2-a7e734d8f370" config-ref="Salesforce_Config" type="ucinn_ascendv2__Phone__c"/> [STUDIO] -->
 							<salesforce:upsert doc:name="Upsert" doc:id="ffa555d8-9915-4f27-bef4-91116dbd97f9" config-ref="Salesforce_Config" objectType="ucinn_ascendv2__Phone__c" externalIdFieldName="ucinn_ascendv2__External_System_ID__c"/>
 							<logger level="INFO" doc:name="Logger" doc:id="9b63bb02-e6f4-4722-bd3f-922f9a7237e9" message="Upsert Result is:" />
@@ -181,8 +181,8 @@ output application/json
 payload map(item)-> {
 	message: item.message default "" as String,
     statusCode: item.statusCode default "" as String,
-    exceptionMessage: (item.exception default {localizedMessage:""}).localizedMessage default "" as String,
-	successful:item.successful     
+    //exceptionMessage: (item.exception default {localizedMessage:""}).localizedMessage default "" as String,
+	//successful:item.successful     
 }]]></ee:set-payload>
 										</ee:message>
 									</ee:transform>

@@ -157,7 +157,7 @@ payload map (item) -> (
 				<batch:process-records >
 					<batch:step name="Batch_Step" doc:id="a78c88fe-05d3-44c1-9592-39ccfd8f4582" >
 						<batch:aggregator doc:name="Batch Aggregator Address Relations" doc:id="9ecca964-6e26-4d2a-8662-acf503425421" size="50">
-							<set-variable value='#[payload map (item) -&gt;(&#10;item &#10;- "ucinn_ascendv2__Contact__r" &#10;- "ucinn_ascendv2__Account__r"&#10;- "ucinn_ascendv2__Address__r"&#10;)&#10;++ &#10;{&#10;    "ucinn_ascendv2__Contact__r.ucinn_ascendv2__External_System_ID__c":&#10;    item.ucinn_ascendv2__Contact__r.ucinn_ascendv2__External_System_ID__c default "" as String&#10;    }&#10;++ &#10;{&#10;    "ucinn_ascendv2__Account__r.ucinn_ascendv2__External_System_ID__c":&#10;    item.ucinn_ascendv2__Account__r.ucinn_ascendv2__External_System_ID__c default ""  as String&#10;    }&#10;++&#10;{&#10;    "ucinn_ascendv2__Address__r.NCSU_External_System_ID__c":&#10;    item.ucinn_ascendv2__Address__r.NCSU_External_System_ID__c default ""  as String&#10;    }]' doc:name="Set Variable" doc:id="3d15bd97-2296-44c8-b913-a1f48e84c177" variableName="RequestPayload"/>
+							<set-variable value='#[payload map (item) -&gt; &#10;{&#10;    "ucinn_ascendv2__Contact__r.ucinn_ascendv2__External_System_ID__c":&#10;    item.ucinn_ascendv2__Contact__r.ucinn_ascendv2__External_System_ID__c default "" as String,&#10;   &#10;    "ucinn_ascendv2__Account__r.ucinn_ascendv2__External_System_ID__c":&#10;    item.ucinn_ascendv2__Account__r.ucinn_ascendv2__External_System_ID__c default ""  as String,&#10;    "ucinn_ascendv2__Address__r.NCSU_External_System_ID__c":&#10;    item.ucinn_ascendv2__Address__r.NCSU_External_System_ID__c default ""  as String&#10;}]' doc:name="Set Variable" doc:id="3d15bd97-2296-44c8-b913-a1f48e84c177" variableName="RequestPayload"/>
 							<salesforce:upsert objectType="ucinn_ascendv2__Address_Relation__c" externalIdFieldName="NCSU_External_System_ID__c" doc:name="Upsert" doc:id="3be47d5c-d894-462b-83d4-9d7b0df62e9b" config-ref="Salesforce_Config"/>
 							<logger level="INFO" doc:name="Logger" doc:id="ab7385b0-dad6-4742-ba03-dfa880f771db" message="Upsert Result is:"/>
 							<logger level="INFO" doc:name="Logger" doc:id="142cd55e-4821-4907-b06e-e58177ddf0f0" message="#[payload.successful]"/>
@@ -187,8 +187,8 @@ output application/json
 payload map(item)-> {
 	message: item.message default "" as String,
     statusCode: item.statusCode default "" as String,
-    exceptionMessage: (item.exception default {localizedMessage:""}).localizedMessage default "" as String,
-	successful:item.successful     
+    //exceptionMessage: (item.exception default {localizedMessage:""}).localizedMessage default "" as String,
+	//successful:item.successful     
 }]]></ee:set-payload>
 										</ee:message>
 									</ee:transform>
