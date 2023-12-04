@@ -1,0 +1,23 @@
+# Anypoint Studio
+.settings/
+bin/
+.target/
+logs/
+
+# Maven
+target/
+.mule/
+
+# Compiled Java classes
+*.class
+
+# Package files
+*.jar
+*.zip
+*.war
+*.ear
+
+# IDE files
+*.iml
+*.ipr
+*.i
