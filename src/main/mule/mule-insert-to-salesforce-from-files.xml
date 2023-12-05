@@ -15,5 +15,5 @@ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/cu
 	<salesforce:sfdc-config name="Salesforce_Config" doc:name="Salesforce Config" doc:id="b37e3be7-03bf-47b6-9409-4038db115f6b" >
 		<salesforce:basic-connection username="${salesforce.username}" password="${salesforce.password}" securityToken="${salesforce.securitytoken}" url="https://test.salesforce.com/services/Soap/u/58.0" />
 	</salesforce:sfdc-config>
-	<configuration-properties doc:name="Configuration properties" doc:id="22423580-4d45-4d46-ab9f-cf712563b8be" file="config-properties-ascend-dev.yaml" />
+	<configuration-properties doc:name="Configuration properties" doc:id="22423580-4d45-4d46-ab9f-cf712563b8be" file="config-properties-qa.yaml" />
 </mule>

@@ -23,7 +23,7 @@ output application/json deferred=true
 			</ee:message>
 		</ee:transform>
 		<foreach doc:name="For Each fifty thousand address Relations" doc:id="625e6c31-b461-4e75-90f6-f692e87d9793" batchSize="50000">
-			<ee:transform doc:name="Transform Message" doc:id="a3877531-2ffe-47da-a1ce-0b14e78f66f1" >
+			<ee:transform doc:name="Transform Ext IDs for Address Relations" doc:id="a3877531-2ffe-47da-a1ce-0b14e78f66f1" >
 				<ee:message >
 					<ee:set-payload ><![CDATA[%dw 2.0
 output application/java
@@ -75,7 +75,7 @@ var modifiedddressPayload = modifiedAccountPayload map(item)->if(item.ucinn_asce
 modifiedddressPayload]]></ee:set-payload>
 				</ee:message>
 			</ee:transform>
-			<ee:transform doc:name="Transform Message" doc:id="fdc141f3-882e-46be-a756-8a6fd7a0d255" >
+			<ee:transform doc:name="Final Mapping for Address Relations" doc:id="fdc141f3-882e-46be-a756-8a6fd7a0d255" >
 				<ee:message >
 					<ee:set-payload ><![CDATA[%dw 2.0
 output application/java
@@ -153,11 +153,11 @@ payload map (item) -> (
 				</ee:message>
 			</ee:transform>
 			<logger level="INFO" doc:name="Logger" doc:id="34a19bd5-0493-4d48-a5a8-bce4d2404eef" message="Transformation of data is successful"/>
-			<batch:job jobName="mule-insert-to-address-relation-from-fileBatch_Job" doc:id="582adf16-d7cb-4189-8951-b9021ce5ba8b" blockSize="306" maxConcurrency="6">
+			<batch:job jobName="mule-insert-to-address-relation-from-fileBatch_Job" doc:id="582adf16-d7cb-4189-8951-b9021ce5ba8b" blockSize="200" maxConcurrency="4">
 				<batch:process-records >
 					<batch:step name="Batch_Step" doc:id="a78c88fe-05d3-44c1-9592-39ccfd8f4582" >
 						<batch:aggregator doc:name="Batch Aggregator Address Relations" doc:id="9ecca964-6e26-4d2a-8662-acf503425421" size="50">
-							<set-variable value='#[payload map (item) -&gt; &#10;{&#10;    "ucinn_ascendv2__Contact__r.ucinn_ascendv2__External_System_ID__c":&#10;    item.ucinn_ascendv2__Contact__r.ucinn_ascendv2__External_System_ID__c default "" as String,&#10;   &#10;    "ucinn_ascendv2__Account__r.ucinn_ascendv2__External_System_ID__c":&#10;    item.ucinn_ascendv2__Account__r.ucinn_ascendv2__External_System_ID__c default ""  as String,&#10;    "ucinn_ascendv2__Address__r.NCSU_External_System_ID__c":&#10;    item.ucinn_ascendv2__Address__r.NCSU_External_System_ID__c default ""  as String&#10;}]' doc:name="Set Variable" doc:id="3d15bd97-2296-44c8-b913-a1f48e84c177" variableName="RequestPayload"/>
+							<set-variable value='#[payload map (item) -&gt; &#10;{&#10;	"NCSU_External_System_ID__c": item.NCSU_External_System_ID__c default "" as String&#10;	/* &#10;    "ucinn_ascendv2__Contact__r.ucinn_ascendv2__External_System_ID__c":&#10;    item.ucinn_ascendv2__Contact__r.ucinn_ascendv2__External_System_ID__c default "" as String,&#10;   &#10;    "ucinn_ascendv2__Account__r.ucinn_ascendv2__External_System_ID__c":&#10;    item.ucinn_ascendv2__Account__r.ucinn_ascendv2__External_System_ID__c default ""  as String,&#10;    "ucinn_ascendv2__Address__r.NCSU_External_System_ID__c":&#10;    item.ucinn_ascendv2__Address__r.NCSU_External_System_ID__c default ""  as String&#10;    */&#10;}]' doc:name="Set Variable" doc:id="3d15bd97-2296-44c8-b913-a1f48e84c177" variableName="RequestPayload"/>
 							<salesforce:upsert objectType="ucinn_ascendv2__Address_Relation__c" externalIdFieldName="NCSU_External_System_ID__c" doc:name="Upsert" doc:id="3be47d5c-d894-462b-83d4-9d7b0df62e9b" config-ref="Salesforce_Config"/>
 							<logger level="INFO" doc:name="Logger" doc:id="ab7385b0-dad6-4742-ba03-dfa880f771db" message="Upsert Result is:"/>
 							<logger level="INFO" doc:name="Logger" doc:id="142cd55e-4821-4907-b06e-e58177ddf0f0" message="#[payload.successful]"/>
@@ -208,7 +208,7 @@ payload map ((item, index) -> requestItems[index] ++ responseItems[index] )
 									<ee:transform doc:name="create csv for addr relations" doc:id="ad49e007-8974-49d5-b2ed-d00b123c7b41" >
 										<ee:message >
 											<ee:set-payload ><![CDATA[%dw 2.0
-output application/csv quoteHeader=true, quoteValues=true
+output application/csv header=false, quoteValues=true
 var filteredPayload = payload filter (item) -> item.successful == false
 ---
 filteredPayload 

@@ -1,7 +1,7 @@
 salesforce:
-  username: "dsahoo2@ncsu.edu.ascenddev"
-  password: "Dips@123dips"
-  securitytoken: "e0WfOrpLxb8zadeUnnjKikzMj"
+  username: "dsahoo2@ncsu.edu.qa"
+  password: "Dips@123d"
+  securitytoken: "OQh3GFKlN1hcn3XyAAU386Ghg"
   
 fileConnector:
   phoneRecordsReadFolder: "C:\\Users\\dsahoo2\\Downloads\\MulesoftDataLoad\\CsvFiles\\PhoneRecords"
@@ -12,7 +12,7 @@ fileConnector:
   AddressRelationsMoveToFolder: "C:\\Users\\dsahoo2\\Downloads\\MulesoftDataLoad\\CsvUploadResultFiles\\AddressRelations"
   AddressRelationsReadExcelFile: "C:\\Users\\dsahoo2\\Downloads\\MulesoftDataLoad\\CsvFiles\\AddressRelations\\AddressRelationsFile.xlsx"
   AddressRelationsWriteExcelFile: "C:\\Users\\dsahoo2\\Downloads\\MulesoftDataLoad\\CsvUploadResultFiles\\AddressRelations\\AddressRelationsResults.csv"
-  ConstituentsReadFolder: "C:\\Users\\dsahoo2\\Downloads\\MulesoftDataLoad\\CsvFiles\\Constituents"
-  ConstituentsMoveToFolder: "C:\\Users\\dsahoo2\\Downloads\\MulesoftDataLoad\\CsvUploadResultFiles\\Constituents"
-  ConstituentsReadExcelFile: "C:\\Users\\dsahoo2\\Downloads\\MulesoftDataLoad\\CsvFiles\\Constituents\\ConstituentsFile.xlsx"
-  ConstituentsWriteExcelFile: "C:\\Users\\dsahoo2\\Downloads\\MulesoftDataLoad\\CsvUploadResultFiles\\Constituents\\ConstituentsResults.csv"
+  ConstituentsReadFolder: "C:\\Users\\disahoo\\Downloads\\MulesoftDataLoad\\CsvFiles\\Constituents"
+  ConstituentsMoveToFolder: "C:\\Users\\disahoo\\Downloads\\MulesoftDataLoad\\CsvUploadResultFiles\\Constituents"
+  ConstituentsReadExcelFile: "C:\\Users\\disahoo\\Downloads\\MulesoftDataLoad\\CsvFiles\\Constituents\\ConstituentsFile.xlsx"
+  ConstituentsWriteExcelFile: "C:\\Users\\disahoo\\Downloads\\MulesoftDataLoad\\CsvUploadResultFiles\\Constituents\\ConstituentsResults.csv"

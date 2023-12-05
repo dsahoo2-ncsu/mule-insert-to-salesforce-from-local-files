@@ -8,6 +8,12 @@
     },
     "a1e07c99-ca82-4c76-ace7-e47ce4a39061": {
       "payload": "sample_data/list_java_1.dwl"
+    },
+    "4129a86d-0409-4baa-a86d-23e9074cd308": {
+      "payload": "sample_data/list_json_1.json"
+    },
+    "d47b795a-6638-4604-90f7-16a14b64c318": {
+      "payload": "sample_data/list_json_2.json"
     }
   }
 }

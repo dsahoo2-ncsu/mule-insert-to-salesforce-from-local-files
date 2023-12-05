@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce"
+	xmlns:batch="http://www.mulesoft.org/schema/mule/batch"
+	xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/batch http://www.mulesoft.org/schema/mule/batch/current/mule-batch.xsd 
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd 
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd">
+	<flow name="mule-insert-to-constituents-from-file" doc:id="a7e8be48-980c-47df-a40e-9d75efb4108b" >
+		<file:listener doc:name="On New or Updated File in Constituents" doc:id="cda2d18c-2505-44eb-9857-92031f7d01ac" config-ref="File_Config" directory="${fileConnector.ConstituentsReadFolder}" moveToDirectory="${fileConnector.ConstituentsMoveToFolder}" overwrite="true">
+			<scheduling-strategy >
+				<fixed-frequency />
+			</scheduling-strategy>
+		</file:listener>
+		<file:read doc:name="Read File from Constituents" doc:id="f970b40a-c283-42e7-be9e-1a067ede0f4a" config-ref="File_Config" path="${fileConnector.ConstituentsReadExcelFile}" outputMimeType="application/xlsx; streaming=true" outputEncoding="UTF-8"/>
+		<ee:transform doc:name="Transform Constituents From  excel to json" doc:id="96c4c177-7864-46ad-a357-5478cc451692">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json deferred=true
+---
+(payload.Sheet1 default [])]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<foreach doc:name="For Each fifty thousand Constituents" doc:id="a6b41f7b-b3f7-4456-b69a-4cfc696c7714" batchSize="50000">
+			<ee:transform doc:name="Transform External IDS for Constituents" doc:id="4129a86d-0409-4baa-a86d-23e9074cd308">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+
+var filteredPayload = payload map (item) -> 
+    (item 
+    - "Account.ucinn_ascendv2__External_System_ID__c" 
+    ++
+    "Account": {
+      "ucinn_ascendv2__External_System_ID__c": item["Account.ucinn_ascendv2__External_System_ID__c"]
+    }
+    )
+    
+var modifiedPayload = filteredPayload map (item) -> 
+  ( 
+    if (
+      (item.Account.ucinn_ascendv2__External_System_ID__c == "" or item.Account.ucinn_ascendv2__External_System_ID__c == null)
+    )
+      item - "Account"
+    else 
+      item
+  )
+  
+---
+modifiedPayload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+			<ee:transform doc:name="Final Constituents Mapping" doc:id="d47b795a-6638-4604-90f7-16a14b64c318">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/java
+
+fun convertedDate(dateTimeString) = 
+    dateTimeString as Date { format: "yyyy-MM-dd HH:mm:ss" } as Date { format: "yyyy-MM-dd" }
+fun convertDateTime(dateTimeString) =
+    dateTimeString as LocalDateTime {format: "yyyy-MM-dd HH:mm:ss"}  >> "UTC"
+---
+payload map (item) -> (
+    item
+    - "NCSU_FERA_Status"
+    - "NCSU_FirstName_Preferred"
+    - "NCSU_academic_level"
+    - "ucinn_ascendv2__Is_Deceased__c"
+    - "NCSU_Historic_Created_Date__c"
+    - "NCSU_Modified_Date__c"
+    - "LastModifiedDate"
+    - "CreatedDate"
+    - "ucinn_ascendv2__Date_Marked_Deceased__c"
+     
+    ++ (
+        if (item.CreatedDate != "" and item.CreatedDate != null) {
+            "CreatedDate": convertDateTime(item.CreatedDate)
+        }
+        else 
+        {}
+    )
+    ++ (
+        if (item.LastModifiedDate != "" and item.LastModifiedDate != null) {
+            "LastModifiedDate": convertDateTime(item.LastModifiedDate)
+        }
+        else 
+        {}
+    )
+    ++ (
+        if (item.NCSU_Historic_Created_Date__c != "" and item.NCSU_Historic_Created_Date__c != null) {
+            "NCSU_Historic_Created_Date__c": convertedDate(item.NCSU_Historic_Created_Date__c) as Date { format: "yyyy-MM-dd" }
+        }
+        else 
+        {}
+    )
+    ++ 
+    (
+        if (item.NCSU_Modified_Date__c != "" and item.NCSU_Modified_Date__c != null) {
+            "NCSU_Modified_Date__c": convertedDate(item.NCSU_Modified_Date__c) as Date { format: "yyyy-MM-dd" }
+        }
+        else 
+        {}
+    )
+    ++ 
+    (
+        if (item.ucinn_ascendv2__Date_Marked_Deceased__c != "" and item.ucinn_ascendv2__Date_Marked_Deceased__c != null) {
+            "ucinn_ascendv2__Date_Marked_Deceased__c": convertedDate(item.ucinn_ascendv2__Date_Marked_Deceased__c) as Date { format: "yyyy-MM-dd" }
+        }
+        else 
+        {}
+    )
+    ++ 
+    (
+        if(item.ucinn_ascendv2__Is_Deceased__c == "True" or item.ucinn_ascendv2__Is_Deceased__c == "TRUE" or item.ucinn_ascendv2__Is_Deceased__c == "true" ){
+            "ucinn_ascendv2__Is_Deceased__c": true as Boolean
+        } 
+        else {
+            "ucinn_ascendv2__Is_Deceased__c": false as Boolean
+        }
+    )
+    /* 
+    ++ 
+    (
+        if(item.NCSU_FERA_Status == "True" or item.NCSU_FERA_Status == "TRUE" or item.NCSU_FERA_Status == "true" ){
+            "NCSU_FERA_Status": true as Boolean
+        } 
+        else {
+            "NCSU_FERA_Status": false as Boolean
+        }
+    )
+    */
+)]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+			<logger level="INFO" doc:name="Logger" doc:id="b9644d5e-df2b-444c-bd2a-417c1c8e0c47" message="Transformation of data is successful" />
+			<batch:job jobName="mule-insert-to-sf-from-csvBatch_Job_Constituents" doc:id="f15b9300-dc0b-4c6a-ac3c-ed9e40effadf" blockSize="250" maxConcurrency="5">
+			<batch:process-records>
+				<batch:step name="Batch_Step_Constituents" doc:id="5246fa8d-9393-4917-ae90-ab61c705e9bd">
+					<batch:aggregator doc:name="Batch Aggregator_Constituents" doc:id="eb6a0faa-7713-4358-abcc-d5904c35414b" size="50">
+							<set-variable value='#[payload map (item) -&gt;&#10;{&#10;    "ucinn_ascendv2__External_System_ID__c":&#10;    item.ucinn_ascendv2__External_System_ID__c default "" as String,&#10;    /* &#10;    "ucinn_ascendv2__Account__r.ucinn_ascendv2__External_System_ID__c":&#10;    item.Account.ucinn_ascendv2__External_System_ID__c default ""  as String&#10;    */&#10;}]' doc:name="Set Variable" doc:id="0076f020-b53e-4477-8d41-b2c74404abd3" variableName="RequestPayload" />
+							<salesforce:create type="Contact" doc:name="Create" doc:id="3a408ed6-0bf8-4b9f-9309-94e2ee26868a" config-ref="Salesforce_Config" />
+							<logger level="INFO" doc:name="Logger" doc:id="1b74bbce-b93b-4cbf-bdd1-bf1c332fd3cc" message="Upsert Result is:" />
+							<logger level="INFO" doc:name="Logger" doc:id="9ffd1fdc-e1e1-40ec-a8ed-f89925376569" message="#[payload.successful]" />
+							<choice doc:name="Choice_Constituents" doc:id="c79d5f5c-85a5-46ec-8db6-47c28a8726ae">
+							<when expression="#[payload.successful == true]">
+								<logger level="INFO" doc:name="Logger" doc:id="665ba3ce-c90f-42ba-9dc3-d51944a2adff" message="Upsert successful" />
+							</when>
+							<otherwise>
+								<logger level="INFO" doc:name="Logger" doc:id="8b7d3a87-eee2-490d-9e2b-9ebf4484d208" message="Upsert Failed" />
+								<ee:transform doc:name="Remove Statck trace from Phone" doc:id="1ef72e97-a60a-4d04-92b2-047cdcc640da">
+				<ee:message>
+					<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+fun removeStackTrace(exception) =
+  (exception default {"stackTrace":null}) - "stackTrace"
+---
+(payload.items default []) map (item) -> item - "exception"++ 
+  "exception": removeStackTrace(item.exception)
+]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+								<ee:transform doc:name="Trime Unnecessary nodes" doc:id="ced23429-1c84-4175-ab3d-0f0c0e2c3fc9">
+										<ee:message>
+											<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+payload map(item)-> {
+	message: item.message default "" as String,
+    statusCode: item.statusCode default "" as String,
+    //exceptionMessage: (item.exception default {localizedMessage:""}).localizedMessage default "" as String,
+	successful:item.successful     
+}]]></ee:set-payload>
+										</ee:message>
+									</ee:transform>
+									<ee:transform doc:name="Add Original Payload" doc:id="f7d337ea-8764-4e08-a763-1507533b622d">
+										<ee:message>
+											<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+
+var requestItems = vars.RequestPayload
+var responseItems = payload
+---
+payload map ((item, index) -> requestItems[index] ++ responseItems[index] )
+
+]]></ee:set-payload>
+										</ee:message>
+									</ee:transform>
+									<ee:transform doc:name="Create CSV" doc:id="2a0cb9db-5963-4ede-ad34-1b0a03fd7c3f">
+										<ee:message>
+											<ee:set-payload><![CDATA[%dw 2.0
+output application/csv header=false, quoteValues=true
+var filteredPayload = payload filter (item) -> item.successful == false
+---
+filteredPayload]]></ee:set-payload>
+										</ee:message>
+									</ee:transform>
+									<file:write doc:name="Write" doc:id="be1fab33-1379-49e2-bec1-4898bd7577b9" config-ref="File_Config" path="${fileConnector.ConstituentsWriteExcelFile}" mode="APPEND">
+								</file:write>
+							
+</otherwise>
+						</choice>
+
+					</batch:aggregator>
+				</batch:step>
+			</batch:process-records>
+			<batch:on-complete>
+				<logger level="INFO" doc:name="Logger" doc:id="48c4a416-42f5-472d-bf7b-a2576064022d" message="#[payload]" />
+					<logger level="INFO" doc:name="Logger" doc:id="220e6e23-9b4c-4b69-8c24-e4348eb43262" message="Batch Job Complete" />
+			</batch:on-complete>
+		</batch:job>
+		</foreach>
+		<logger level="INFO" doc:name="Logger" doc:id="7a8d9a07-97ec-44dd-9521-ebbf92d5ac48" message="Flow Complete" />
+	</flow>
+	
+	</mule>
