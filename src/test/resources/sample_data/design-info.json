@@ -14,6 +14,12 @@
     },
     "d47b795a-6638-4604-90f7-16a14b64c318": {
       "payload": "sample_data/list_json_2.json"
+    },
+    "0621029c-c84e-4f61-aced-1e004054192a": {
+      "payload": "sample_data/list_java_2.dwl"
+    },
+    "9a406612-ae9b-419e-ab1d-0aa00edbc29e": {
+      "payload": "sample_data/list_json_3.json"
     }
   }
 }

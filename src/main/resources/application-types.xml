@@ -100,4 +100,22 @@ type ConstituentsExample = Array<{|  Description: String,   FirstName: String,  
       </types:input-event>
     </types:processor-declaration>
   </types:enrichment>
+  <types:enrichment select="#9a406612-ae9b-419e-ab1d-0aa00edbc29e">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="PhoneRecordsExample[]"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#f7ff2780-11e0-4b3c-bd5f-049e8274537c">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="PhoneRecordsExelData"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
 </types:mule>
